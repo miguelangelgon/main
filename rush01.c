@@ -45,27 +45,45 @@ void printMatrix(int matrix[N][N])
 int	checkClues(int matrix[N][N], int clues[4][N])
 {
 	int i = 0;
-	while (i < N) {
+	while (i < N) 
+	{
 		int	maxTop;
 		int	maxBottom;
-		int	maxLeft
+		int	maxLeft;
 		int	maxRight;
-		int countTop = 0, countBottom = 0, countLeft = 0, countRight = 0;
-        int j = 0;
-        while (j < N) {
-            if (matrix[i][j] > maxTop) {
-                maxTop = matrix[i][j];
-                countTop++;
-            }
-            if (matrix[i][N-j-1] > maxBottom) {
+		int countTop;
+		int	countBottom;
+		int	countLeft;
+		int	countRight;
+        int j;
+
+		maxTop = 0;
+		maxBottom = 0;
+		maxLeft = 0;
+		maxRight = 0;
+		countTop = 0;
+		countBottom = 0;
+		countLeft = 0;
+		countRight = 0;
+		j = 0;
+		while (j < N) {
+			if (matrix[i][j] > maxTop) 
+			{
+				maxTop = matrix[i][j];
+				countTop++;
+			}
+			if (matrix[i][N-j-1] > maxBottom) 
+			{
                 maxBottom = matrix[i][N-j-1];
                 countBottom++;
             }
-            if (matrix[j][i] > maxLeft) {
+            if (matrix[j][i] > maxLeft)
+			{
                 maxLeft = matrix[j][i];
                 countLeft++;
             }
-            if (matrix[N-j-1][i] > maxRight) {
+            if (matrix[N-j-1][i] > maxRight)
+			{
                 maxRight = matrix[N-j-1][i];
                 countRight++;
             }
