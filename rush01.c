@@ -2,41 +2,57 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #define N 4
 
-int isValid(int matrix[N][N], int row, int col, int num) {
-    int i = 0;
-    while (i < N) {
-        if (matrix[row][i] == num || matrix[i][col] == num) {
-            return 0;
-        }
-        i++;
-    }
-    return 1;
+int	isValid(int matrix[N][N], int row, int col, int num)
+{
+	int i = 0;
+	while (i < N) 
+	{
+		if (matrix[row][i] == num || matrix[i][col] == num)
+		{
+			return 0;
+		}
+ 		i++;
+	}
+	return 1;
 }
 
-void printMatrix(int matrix[N][N]) {
-    int i = 0;
-    while (i < N) {
+void printMatrix(int matrix[N][N])
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < N)
+	{
+		j = 0;
+		while (j < N)
+		{
+			char num_char = matrix[i][j] + '0'; // Convertir número a carácter
+			write(STDOUT_FILENO, &num_char, 1); // Escribir un carácter
+			if (j != N - 1)
+			{
+				write(STDOUT_FILENO, " ", 1); // Espacio entre números
+			}
+			j++;
+		}
+		write(STDOUT_FILENO, "\n", 1); // Nueva línea al final de la fila
+		i++;
+	}
+}
+
+int	checkClues(int matrix[N][N], int clues[4][N])
+{
+	int i = 0;
+	while (i < N) {
+		int	maxTop;
+		int	maxBottom;
+		int	maxLeft
+		int	maxRight;
+		int countTop = 0, countBottom = 0, countLeft = 0, countRight = 0;
         int j = 0;
         while (j < N) {
-            char num_char = matrix[i][j] + '0'; // Convertir número a carácter
-            write(STDOUT_FILENO, &num_char, 1); // Escribir un carácter
-            write(STDOUT_FILENO, " ", 1); // Espacio entre números
-            j++;
-        }
-        write(STDOUT_FILENO, "\n", 1); // Nueva línea al final de la fila
-        i++;
-    }
-    //write(STDOUT_FILENO, "\n", 1); // Nueva línea al final de la matriz
-}
-
-int checkClues(int matrix[N][N], int clues[4][N]) {
-    for (int i = 0; i < N; i++) {
-        int maxTop = 0, maxBottom = 0, maxLeft = 0, maxRight = 0;
-        int countTop = 0, countBottom = 0, countLeft = 0, countRight = 0;
-        for (int j = 0; j < N; j++) {
             if (matrix[i][j] > maxTop) {
                 maxTop = matrix[i][j];
                 countTop++;
@@ -53,14 +69,15 @@ int checkClues(int matrix[N][N], int clues[4][N]) {
                 maxRight = matrix[N-j-1][i];
                 countRight++;
             }
+            j++;
         }
         if (clues[0][i] != countTop || clues[1][i] != countBottom || clues[2][i] != countLeft || clues[3][i] != countRight) {
             return 0;
         }
+        i++;
     }
     return 1;
 }
-
 void swapMatrixValues(int matrix[N][N]) {
     int temp;
 
@@ -144,7 +161,7 @@ int main(int argc, char *argv[]) {
         swapMatrixValues(matrix);  // Agrega esta línea para intercambiar los valores
         printMatrix(matrix);
     } else {
-        write(STDOUT_FILENO, "No solution found.\n", 19);
+        write(STDOUT_FILENO, "Error.\n", 6);
     }
 
     return 0;
